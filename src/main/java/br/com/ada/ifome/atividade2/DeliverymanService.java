@@ -1,6 +1,7 @@
 package br.com.ada.ifome.atividade2;
 
 
+import br.com.ada.ifome.atividade2.atividade1.Validator;
 import br.com.ada.ifome.atividade2.endereco.EnderecoRepository;
 import br.com.ada.ifome.usuario.exceptions.*;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +19,9 @@ public class DeliverymanService {
     public DeliverymanModel salvar(DeliverymanModel deliveryMan) {
 
         var isCpfValido = this.validaCpf(deliveryMan.getCpf());
+        Validator.validarDocumento(deliveryMan);
+        Validator.validateCNH(deliveryMan);
+        Validator.validarVeiculo(deliveryMan);
         if (!isCpfValido) {
             throw new CpfInvalidoException();
         }
